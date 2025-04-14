@@ -5,7 +5,7 @@
 ### Clone Repositório
 
 ```sh
-git clone https://github.com/gustavogordoni/setup-docker-laravel.git app-laravel
+git clone -b laravel-12-with-php8.4 https://github.com/gustavogordoni/setup-docker-laravel.git app-laravel
 ```
 
 ```sh
