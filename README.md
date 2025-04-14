@@ -1,52 +1,76 @@
-
-# Setup Docker Laravel 11 com PHP 8.3
-[Assine a Academy, e Seja VIP!](https://academy.especializati.com.br)
+# Setup Docker Laravel
 
 ### Passo a passo
-Clone Repositório
+
+### Clone Repositório
+
 ```sh
-git clone -b laravel-12-with-php8.4 https://github.com/especializati/setup-docker-laravel.git app-laravel
+git clone https://github.com/gustavogordoni/setup-docker-laravel.git app-laravel
 ```
+
 ```sh
 cd app-laravel
 ```
 
-Suba os containers do projeto
-```sh
-docker-compose up -d
-```
+### Crie o Arquivo .env
 
-
-Crie o Arquivo .env
 ```sh
 cp .env.example .env
 ```
 
-Acesse o container app
+### Suba os containers com Docker
+
 ```sh
-docker-compose exec app bash
+docker compose up -d
 ```
 
+### Acesse o container da aplicação
 
-Instale as dependências do projeto
+```sh
+docker compose exec app bash
+```
+
+### Instale as dependências do Laravel
+
 ```sh
 composer install
 ```
 
-Gere a key do projeto Laravel
+### Gere a chave da aplicação
+
 ```sh
 php artisan key:generate
 ```
 
-OPCIONAL: Gere o banco SQLite (caso não use o banco MySQL)
-```sh
-touch database/database.sqlite
-```
+### Rode as migrations
 
-Rodar as migrations
 ```sh
 php artisan migrate
 ```
 
-Acesse o projeto
-[http://localhost:8000](http://localhost:8000)
+<!-- 
+### Rode as seeds
+```sh
+php artisan db:seed 
+```
+-->
+
+### Instale as dependências do frontend
+
+```sh
+npm install
+```
+
+### Compile os assets com Vite
+
+```sh
+npm run build
+```
+
+> Se estiver desenvolvendo, use `npm run dev` para recompilar automaticamente ao salvar os arquivos.
+
+---
+
+## Acesse o projeto
+
+Abra no navegador: [http://localhost:8000](http://localhost:8000)
