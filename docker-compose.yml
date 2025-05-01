@@ -1,6 +1,7 @@
 services:
     # image project
     app:
+        container_name: app
         build:
             context: .
             dockerfile: Dockerfile
@@ -16,6 +17,7 @@ services:
 
     # nginx
     nginx:
+        container_name: nginx
         image: nginx:alpine
         restart: unless-stopped
         ports:
@@ -28,6 +30,7 @@ services:
 
     # db mysql
     db:
+        container_name: mysql
         image: mysql:8.0
         platform: linux/x86_64
         restart: unless-stopped
@@ -43,9 +46,10 @@ services:
         networks:
             - laravel
 
-    # postgres
-    # postgres:
-    #     image: postgres:16.4
+    # db postgres
+    # db:
+    #     container_name: postgres
+    #     image: postgres:17
     #     restart: unless-stopped
     #     environment:
     #         POSTGRES_DB: ${DB_DATABASE:-laravel}
@@ -59,7 +63,8 @@ services:
     #         - laravel
 
     # PHPMyAdmin
-    # phpmyadmin:
+    # phpmyadmin:c
+    #     container_name: phpmyadmin
     #     image: phpmyadmin/phpmyadmin
     #     platform: linux/x86_64
     #     restart: unless-stopped
@@ -74,16 +79,33 @@ services:
 
     # mailhog
     # mailhog:
+    #     container_name: mailhog
     #     image: mailhog/mailhog:latest
     #     restart: always
     #     ports:
     #         - 1025:1025
     #         - 8025:8025
     #     networks:
-    #         - laravel    
+    #         - laravel
+
+    # ngrok
+    # ngrok:
+    #     container_name: ngrok
+    #     image: ngrok/ngrok:latest
+    #     restart: unless-stopped
+    #     command: ["start", "--config", "/etc/ngrok.yml", "--all"]
+    #     ports:
+    #         - 4040:4040
+    #     volumes:
+    #     - ./docker/ngrok/ngrok.yml:/etc/ngrok.yml:ro
+    #     depends_on:
+    #     - nginx
+    #     networks:
+    #     - laravel    
 
     # redis
     redis:
+        container_name: redis
         image: redis:latest
         networks:
             - laravel
